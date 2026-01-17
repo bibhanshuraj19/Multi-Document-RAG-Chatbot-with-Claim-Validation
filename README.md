@@ -71,8 +71,8 @@ A beautiful, modern chatbot application that allows you to upload PDF documents 
 
 1. **Start the Backend** (from project root):
    ```bash
-   source venv/bin/activate  # If not already activated
-   python backend/main.py
+   source venv/bin/activate
+   uvicorn backend.main:app --host 0.0.0.0 --port 8000
    ```
    Backend runs at `http://localhost:8000`
 
