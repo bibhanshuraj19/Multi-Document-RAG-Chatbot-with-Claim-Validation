@@ -1,103 +1,188 @@
-# raj.gg - Personal Portfolio
+# 📚 DocuChat AI - Multi-Document RAG Chatbot
 
-A modern, responsive personal portfolio website built with [Next.js](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/) to showcase projects, skills, and interests.
+A beautiful, modern chatbot application that allows you to upload PDF documents and chat with them using Nebius AI. Built with Next.js frontend and FastAPI backend.
 
-**Live Site:** [https://raj-gg.vercel.app](https://raj-gg.vercel.app)
+![DocuChat AI](https://img.shields.io/badge/Powered%20by-Nebius%20AI-blue)
+![Next.js](https://img.shields.io/badge/Frontend-Next.js-black)
+![FastAPI](https://img.shields.io/badge/Backend-FastAPI-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
 
 ## ✨ Features
 
-- **⚡ High Performance**: Built with Next.js for server-side rendering and static site generation.
-- **🎨 Modern Design**: Styled with Tailwind CSS for a clean and responsive UI.
-- **🎭 Smooth Animations**: Enhanced user experience with Framer Motion transitions.
-- **📱 Fully Responsive**: Optimized for desktops, tablets, and mobile devices.
-- **🧩 Interactive Components**: Utilizes Headless UI and custom React components.
-- **🔍 SEO Friendly**: Integrated with `next-seo` for better search engine visibility.
+- **📄 Multi-Document Support**: Upload multiple PDFs, DOCX, TXT, and MD files
+- **📁 Folder Upload**: Process entire folders of documents at once
+- **💬 Intelligent Chat**: Ask questions and get accurate answers with source citations
+- **🔍 Semantic Search**: Find relevant information using advanced embeddings
+- **📊 Document Statistics**: Track your indexed documents and chunks
+- **🎨 Beautiful UI**: Modern, dark-themed interface with smooth animations
+- **⚡ Real-time Responses**: Fast, streaming-like chat experience
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/) (React)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [clsx](https://github.com/lukeed/clsx), [tailwind-merge](https://github.com/dcastil/tailwind-merge)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **UI Components**: [Headless UI](https://headlessui.com/)
-- **Deployment**: [Vercel](https://vercel.com/)
+### Frontend
+- **Next.js 14** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Lucide React** - Icons
+- **React Dropzone** - File uploads
 
-## 🚀 Getting Started
+### Backend
+- **FastAPI** - Python API framework
+- **Nebius AI** - LLM (openai/gpt-oss-20b) & Embeddings (BAAI/bge-en-icl)
+- **ChromaDB** - Vector database
+- **LangChain** - Document processing
 
-Follow these steps to run the project locally on your machine.
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (Latest LTS recommended)
-- [npm](https://www.npmjs.com/) (comes with Node.js)
+- Node.js 18+ and npm
+- Python 3.9+
+- Nebius API key
 
 ### Installation
 
-1. **Clone the repository:**
+1. **Clone or navigate to the project directory:**
    ```bash
-   git clone https://github.com/your-username/raj.gg.git
-   cd raj.gg
+   cd "Multi-Document RAG Chatbot with Claim Validation"
    ```
 
-2. **Install dependencies:**
+2. **Set up the Backend:**
    ```bash
+   # Create virtual environment
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   
+   # Install dependencies
+   pip install -r backend/requirements.txt
+   
+   # Create .env file with your API key
+   echo "NEBIUS_API_KEY=your_api_key_here" > .env
+   ```
+
+3. **Set up the Frontend:**
+   ```bash
+   cd frontend
    npm install
    ```
 
-3. **Run the development server:**
+### Running the Application
+
+1. **Start the Backend** (from project root):
    ```bash
+   source venv/bin/activate  # If not already activated
+   python backend/main.py
+   ```
+   Backend runs at `http://localhost:8000`
+
+2. **Start the Frontend** (in a new terminal):
+   ```bash
+   cd frontend
    npm run dev
    ```
-   Open [http://localhost:3070](http://localhost:3070) in your browser to view the site.
+   Frontend runs at `http://localhost:3000`
 
-### Build for Production
+3. **Open your browser** to `http://localhost:3000`
 
-To create a production build:
+## 📖 How to Use
 
-```bash
-npm run build
+### Uploading Documents
+
+1. **Drag & Drop**: Drag files directly onto the upload zone in the sidebar
+2. **Click to Upload**: Click the upload zone to select files
+3. **Folder Upload**: Enter a folder path and click the upload button
+
+### Chatting with Documents
+
+1. Once documents are uploaded, they're automatically indexed
+2. Type your question in the chat input at the bottom
+3. Press Enter or click the send button
+4. The AI will search through your documents and provide relevant answers
+5. Click on sources to see which documents were used
+
+### Managing Documents
+
+- **View Documents**: See all indexed documents in the sidebar
+- **Delete Document**: Hover over a document and click the X to remove it
+- **Clear Chat**: Remove conversation history
+- **Clear All**: Remove all indexed documents and start fresh
+
+## 📁 Project Structure
+
+```
+Multi-Document RAG Chatbot with Claim Validation/
+├── backend/
+│   ├── main.py              # FastAPI application
+│   └── requirements.txt     # Python dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── index.tsx    # Main chat page
+│   │   │   ├── _app.tsx     # App wrapper
+│   │   │   └── _document.tsx
+│   │   ├── styles/
+│   │   │   └── globals.css  # Global styles
+│   │   └── lib/
+│   │       └── utils.ts     # Utilities & types
+│   ├── public/
+│   ├── package.json
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
+├── src/
+│   ├── __init__.py
+│   ├── document_processor.py  # Document loading
+│   ├── embedding_service.py   # Nebius embeddings
+│   ├── vector_store.py        # ChromaDB storage
+│   └── chatbot.py             # RAG logic
+├── config.py                  # Configuration
+├── env.example               # Environment template
+└── README.md
 ```
 
-To start the production server:
+## ⚙️ Configuration
 
-```bash
-npm run start
-```
+Edit the `.env` file in the project root:
 
-## 📜 Scripts
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `NEBIUS_API_KEY` | Your Nebius API key | Required |
+| `LLM_MODEL` | LLM model to use | `openai/gpt-oss-20b` |
+| `EMBEDDING_MODEL` | Embedding model | `BAAI/bge-en-icl` |
+| `CHUNK_SIZE` | Size of document chunks | `1000` |
+| `CHUNK_OVERLAP` | Overlap between chunks | `200` |
+| `TOP_K_RETRIEVAL` | Number of chunks to retrieve | `5` |
 
-| Script | Description |
-| :--- | :--- |
-| `npm run dev` | Starts the development server on port 3070. |
-| `npm run build` | Builds the application for production. |
-| `npm run start` | Starts the production server on port 3070. |
-| `npm run lint` | Runs ESLint to check for code quality and errors. |
+## 🔧 API Endpoints
 
-## 📂 Project Structure
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| POST | `/api/chat` | Send a chat message |
+| POST | `/api/upload` | Upload files |
+| POST | `/api/upload-folder` | Process a folder |
+| GET | `/api/stats` | Get document statistics |
+| POST | `/api/clear-chat` | Clear chat history |
+| POST | `/api/clear-all` | Clear all data |
+| DELETE | `/api/document/{source}` | Delete a document |
 
-```
-src/
-├── components/       # Reusable UI components
-│   ├── sections/     # Page sections (Hero, About, Projects, etc.)
-│   └── ...           # Buttons, Cards, Modals, etc.
-├── pages/            # Next.js pages
-│   ├── index.tsx     # Main landing page
-│   └── ...
-├── styles/           # Global styles
-└── lib/              # Utility functions and configurations
-```
+## 🎨 Screenshots
+
+The application features a beautiful dark theme with:
+- Gradient accents (cyan to blue)
+- Smooth Framer Motion animations
+- Responsive sidebar design
+- Source citation cards with relevance scores
+- Real-time typing indicators
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have suggestions or want to improve the codebase, feel free to open an issue or submit a pull request.
-
-1. Fork the project.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+Feel free to open issues or submit pull requests for improvements!
 
 ## 📄 License
 
-This project is open source.
+MIT License - feel free to use this project for your own purposes.
+
+---
+
+Built with ❤️ using Nebius AI, Next.js, and FastAPI
